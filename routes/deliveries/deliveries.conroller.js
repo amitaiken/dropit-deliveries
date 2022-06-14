@@ -12,11 +12,11 @@ module.exports = class {
             const results = await connection.Query("FN_DeliveriesWeekly()");
             res.code(results.Status).send(results);
         } catch (error) {
-            console.error(`Error in ChildrenList: ${error.message}`);
+            console.error(`Error in DeliveriesWeekly: ${error.message}`);
 
             res.code(500).send({
                 Status: 500,
-                Message: 'Error in ChildrenList',
+                Message: 'Error in DeliveriesWeekly',
                 Description: error.message,
             });
         }
@@ -26,10 +26,10 @@ module.exports = class {
             const results = await connection.Query("FN_DeliveriesDaily()");
             res.code(results.Status).send(results);
         } catch (error) {
-            console.error(`Error in ChildrenList: ${error.message}`);
+            console.error(`Error in DeliveriesDaily: ${error.message}`);
             res.code(500).send({
                 Status: 500,
-                Message: 'Error in ChildrenList',
+                Message: 'Error in DeliveriesDaily',
                 Description: error.message,
             });
         }
@@ -41,11 +41,11 @@ module.exports = class {
             const results = await connection.query("CALL SP_DeliveriesCancel(?)", [DeliveryID]);
             res.code(results.Status).send(results);
         } catch (error) {
-            console.error(`Error in ChildrenList: ${error.message}`);
+            console.error(`Error in DeliveriesCancel: ${error.message}`);
 
             res.code(500).send({
                 Status: 500,
-                Message: 'Error in ChildrenList',
+                Message: 'Error in DeliveriesCancel',
                 Description: error.message,
             });
         }
@@ -56,11 +56,11 @@ module.exports = class {
             const results = await connection.query("CALL SP_DeliveriesCompleted(?)", [DeliveryID]);
             res.code(results.Status).send(results);
         } catch (error) {
-            console.error(`Error in ChildrenList: ${error.message}`);
+            console.error(`Error in DeliveriesCompleted: ${error.message}`);
 
             res.code(500).send({
                 Status: 500,
-                Message: 'Error in ChildrenList',
+                Message: 'Error in DeliveriesCompleted',
                 Description: error.message,
             });
         }
@@ -73,10 +73,10 @@ module.exports = class {
             const results = await connection.Query("SP_DeliveriesBookDelivery(?)", [BookDelivery]);
             res.code(results.Status).send(results);
         } catch (error) {
-            console.error(`Error in BookDelivery: ${error.message}`);
+            console.error(`Error in DeliveriesBookDelivery: ${error.message}`);
             res.code(500).send({
                 Status: 500,
-                Message: 'Error in ChildrenList',
+                Message: 'Error in DeliveriesBookDelivery',
                 Description: error.message,
             });
         }
