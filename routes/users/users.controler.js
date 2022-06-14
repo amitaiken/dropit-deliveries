@@ -7,6 +7,11 @@ async function getUserFormattedAddress(addressData) {
 }
 
 module.exports = class {
+    constructor(req = {}, res = {}, params = {}) {
+        this.req = req;
+        this.res = res;
+        this.params = params;
+    }
     async UsersResolveAddress(req, res) {
         try {
             const userID = parseInt(req.params['UserID']);

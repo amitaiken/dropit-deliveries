@@ -3,17 +3,17 @@ let config = require('/helper/config');
 let connection = mysql.createConnection(config);
 
 module.exports = class {
+    constructor(req = {}, res = {}, params = {}) {
+        this.req = req;
+        this.res = res;
+        this.params = params;
+    }
     async DeliveriesWeekly(req, res) {
         try {
-            //let childrenListFilter = new global.classes['ChildrenListFilter'](req, res, req.body);
-            //childrenListFilter = JSON.parse(JSON.stringify(childrenListFilter.params));
-            //await ChildrenListFilter.validate();
-
             const results = await connection.Query("FN_DeliveriesWeekly()");
             res.code(results.Status).send(results);
         } catch (error) {
             console.error(`Error in DeliveriesWeekly: ${error.message}`);
-
             res.code(500).send({
                 Status: 500,
                 Message: 'Error in DeliveriesWeekly',
@@ -34,7 +34,6 @@ module.exports = class {
             });
         }
     }
-
     async DeliveriesCancel(req, res) {
         try {
             const DeliveryID = parseInt(req.params['DeliveryID']);
