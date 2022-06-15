@@ -1,633 +1,730 @@
 {
-  "swagger" : "2.0",
-  "info" : {
-    "description" : "Deliveries control system",
-    "version" : "1.0.0",
-    "title" : "DeliveriesManageAPI",
-    "termsOfService" : "",
-    "contact" : { }
+  "host": "dropit.deliveries.admin.co.il",
+  "info": {
+    "title": "DeliveriesManageAPI",
+    "contact": {},
+    "version": "0.01",
+    "description": "Deliveries control system",
+    "termsOfService": ""
   },
-  "host" : "virtserver.swaggerhub.com",
-  "basePath" : "/amitaiken/deliveiesAPI/1.0.0",
-  "schemes" : [ "https" ],
-  "consumes" : [ "application/json" ],
-  "produces" : [ "application/json" ],
-  "paths" : {
-    "/Deliveries/Dayly/" : {
-      "get" : {
-        "tags" : [ "Deliveries" ],
-        "operationId" : "DeliveriesDayly",
-        "parameters" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "schema" : {
-              "$ref" : "#/definitions/DeliveriesListResponse"
-            }
+  "paths": {
+    "/Deliveries/Dayly/": {
+      "get": {
+        "tags": [
+          "Deliveries"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DeliveriesListResponse"
+            },
+            "description": "Status 200"
           },
-          "400" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "description": "Error Response"
           }
         },
-        "x-AuthType" : [ "None" ],
-        "x-serviceID" : 1,
-        "x-methodName" : "Dayly",
-        "x-serviceName" : "Deliveries"
+        "parameters": [],
+        "x-AuthType": [
+          "None"
+        ],
+        "operationId": "DeliveriesDayly",
+        "x-serviceID": 1,
+        "x-methodName": "Dayly",
+        "x-serviceName": "Deliveries"
       }
     },
-    "/Deliveries/Weekly/" : {
-      "get" : {
-        "tags" : [ "Deliveries" ],
-        "operationId" : "DeliveriesWeekly",
-        "parameters" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "schema" : {
-              "$ref" : "#/definitions/DeliveriesListResponse"
-            }
+    "/Deliveries/Weekly/": {
+      "get": {
+        "tags": [
+          "Deliveries"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DeliveriesListResponse"
+            },
+            "description": "Status 200"
           },
-          "400" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "description": "Error Response"
           }
         },
-        "x-AuthType" : [ "None" ],
-        "x-serviceID" : 1,
-        "x-methodName" : "Weekly",
-        "x-serviceName" : "Deliveries"
+        "parameters": [],
+        "x-AuthType": [
+          "None"
+        ],
+        "operationId": "DeliveriesWeekly",
+        "x-serviceID": 1,
+        "x-methodName": "Weekly",
+        "x-serviceName": "Deliveries"
       }
     },
-    "/Schedule/Timeslots/" : {
-      "post" : {
-        "tags" : [ "Schedule" ],
-        "operationId" : "ScheduleTimeslots",
-        "parameters" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "schema" : {
-              "$ref" : "#/definitions/TimeSlot"
-            }
+    "/Schedule/Timeslots/": {
+      "post": {
+        "tags": [
+          "Schedule"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/TimeSlot"
+            },
+            "description": "Status 200"
           },
-          "400" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "description": "Error Response"
           }
         },
-        "x-AuthType" : [ "None" ],
-        "x-serviceID" : 12,
-        "x-methodName" : "Timeslots",
-        "x-serviceName" : "Schedule"
+        "parameters": [],
+        "x-AuthType": [
+          "None"
+        ],
+        "operationId": "ScheduleTimeslots",
+        "x-serviceID": 12,
+        "x-methodName": "Timeslots",
+        "x-serviceName": "Schedule"
       }
     },
-    "/Deliveries/BookDelivery/" : {
-      "post" : {
-        "tags" : [ "Deliveries" ],
-        "operationId" : "DeliveriesBookDelivery",
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "DeliveriesBook",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/DeliveriesBook"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "schema" : {
-              "$ref" : "#/definitions/DeliveriesBookResponse"
-            }
+    "/Deliveries/BookDelivery/": {
+      "post": {
+        "tags": [
+          "Deliveries"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DeliveriesBookResponse"
+            },
+            "description": "Status 200"
           },
-          "400" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "description": "Error Response"
           }
         },
-        "x-AuthType" : [ "None" ],
-        "x-serviceID" : 1,
-        "x-methodName" : "BookDelivery",
-        "x-serviceName" : "Deliveries"
+        "parameters": [
+          {
+            "in": "body",
+            "name": "DeliveriesBook",
+            "schema": {
+              "$ref": "#/definitions/DeliveriesBook"
+            }
+          }
+        ],
+        "x-AuthType": [
+          "None"
+        ],
+        "operationId": "DeliveriesBookDelivery",
+        "x-serviceID": 1,
+        "x-methodName": "BookDelivery",
+        "x-serviceName": "Deliveries"
       }
     },
-    "/Users/FormatedAdressUpdate/" : {
-      "post" : {
-        "tags" : [ "Users" ],
-        "operationId" : "UsersFormatedAdressUpdate",
-        "parameters" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "schema" : {
-              "$ref" : "#/definitions/Response"
-            }
+    "/Users/ResolveAddress/{UserID}": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/FormattedAddressResponse"
+            },
+            "description": "Status 200"
           },
-          "400" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "description": "Error Response"
           }
         },
-        "x-AuthType" : [ "None" ],
-        "x-serviceID" : 15,
-        "x-methodName" : "FormatedAdressUpdate",
-        "x-serviceName" : "Users"
+        "parameters": [
+          {
+            "in": "path",
+            "name": "UserID",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "x-AuthType": [
+          "None"
+        ],
+        "operationId": "UsersResolveAddress",
+        "x-serviceID": 15,
+        "x-methodName": "ResolveAddress",
+        "x-serviceName": "Users"
       }
     },
-    "/Users/ResolveAdress/{UserID}" : {
-      "post" : {
-        "tags" : [ "Users" ],
-        "operationId" : "UsersResolveAdress",
-        "parameters" : [ {
-          "name" : "UserID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "schema" : {
-              "$ref" : "#/definitions/GeneralObject"
-            }
+    "/Deliveries/Cancel/{DeliveryID}": {
+      "post": {
+        "tags": [
+          "Deliveries"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CancelResponse"
+            },
+            "description": "Status 200"
           },
-          "400" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "description": "Error Response"
           }
         },
-        "x-AuthType" : [ "None" ],
-        "x-serviceID" : 15,
-        "x-methodName" : "ResolveAdress",
-        "x-serviceName" : "Users"
+        "parameters": [
+          {
+            "in": "path",
+            "name": "DeliveryID",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "x-AuthType": [
+          "None"
+        ],
+        "operationId": "DeliveriesCancel",
+        "x-serviceID": 1,
+        "x-methodName": "Cancel",
+        "x-serviceName": "Deliveries"
       }
     },
-    "/Deliveries/Cancel/{DeliveryID}" : {
-      "post" : {
-        "tags" : [ "Deliveries" ],
-        "operationId" : "DeliveriesCancel",
-        "parameters" : [ {
-          "name" : "DeliveryID",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "schema" : {
-              "$ref" : "#/definitions/CancalResponse"
-            }
+    "/Deliveries/Complete/{DeliveryID}": {
+      "post": {
+        "tags": [
+          "Deliveries"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CompleteResponse"
+            },
+            "description": "Status 200"
           },
-          "400" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "description": "Error Response"
           }
         },
-        "x-AuthType" : [ "None" ],
-        "x-serviceID" : 1,
-        "x-methodName" : "Cancel",
-        "x-serviceName" : "Deliveries"
+        "parameters": [
+          {
+            "in": "path",
+            "name": "DeliveryID",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "x-AuthType": [
+          "None"
+        ],
+        "operationId": "DeliveriesComplete",
+        "x-serviceID": 1,
+        "x-methodName": "Complete",
+        "x-serviceName": "Deliveries"
       }
     },
-    "/Deliveries/Complete/{DeliveryID}" : {
-      "post" : {
-        "tags" : [ "Deliveries" ],
-        "operationId" : "DeliveriesComplete",
-        "parameters" : [ {
-          "name" : "DeliveryID",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Status 200",
-            "schema" : {
-              "$ref" : "#/definitions/CompleteResponse"
-            }
+    "/Users/FormatedAddressUpdate/{UserID}/{FormatedAddress}": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/FormattedAddressResponse"
+            },
+            "description": "Status 200"
           },
-          "400" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
-            }
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "description": "Error Response"
           }
         },
-        "x-AuthType" : [ "None" ],
-        "x-serviceID" : 1,
-        "x-methodName" : "Complete",
-        "x-serviceName" : "Deliveries"
+        "parameters": [
+          {
+            "in": "path",
+            "name": "FormatedAddress",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "UserID",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "x-AuthType": [
+          "None"
+        ],
+        "operationId": "UsersFormatedAddressUpdate",
+        "x-serviceID": 15,
+        "x-methodName": "FormatedAddressUpdate",
+        "x-serviceName": "Users"
       }
     }
   },
-  "securityDefinitions" : { },
-  "definitions" : {
-    "Error" : {
-      "type" : "object",
-      "properties" : {
-        "Description" : {
-          "type" : "string",
-          "example" : "bad username",
-          "description" : "General ui of the error"
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "basePath": "/v1",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "example": "bad username",
+          "description": "General ui of the error"
         },
-        "ReasonPhrase" : {
-          "type" : "string",
-          "example" : "1, 4",
-          "description" : "Specific reason for the error"
+        "ReasonPhrase": {
+          "type": "string",
+          "example": "1, 4",
+          "description": "Specific reason for the error"
         }
       }
     },
-    "Users" : {
-      "type" : "object",
-      "properties" : {
-        "City" : {
-          "type" : "string",
-          "example" : "Natanya"
+    "Users": {
+      "type": "object",
+      "properties": {
+        "City": {
+          "type": "string",
+          "example": "Natanya"
         },
-        "State" : {
-          "type" : "string",
-          "example" : "Israel"
+        "State": {
+          "type": "string",
+          "example": "Israel"
         },
-        "Adress" : {
-          "type" : "string",
-          "example" : "Netiv 4"
+        "Adress": {
+          "type": "string",
+          "example": "Netiv 4"
         },
-        "UserID" : {
-          "type" : "integer",
-          "example" : 1
+        "UserID": {
+          "type": "integer",
+          "example": 1
         },
-        "Phone_1" : {
-          "type" : "string",
-          "example" : "0505246951"
+        "Address": {
+          "type": "string",
+          "example": "Netiv 4"
         },
-        "Phone_2" : {
-          "type" : "string"
+        "Phone_1": {
+          "type": "string",
+          "example": "0505246951"
         },
-        "ZipCode" : {
-          "type" : "string"
+        "Phone_2": {
+          "type": "string"
         },
-        "CompanyName" : {
-          "type" : "string",
-          "example" : "Telcom"
+        "ZipCode": {
+          "type": "string"
         },
-        "ConsulName_2" : {
-          "type" : "string",
-          "example" : "Danni"
+        "CompanyName": {
+          "type": "string",
+          "example": "Telcom"
+        },
+        "ConsulName_2": {
+          "type": "string",
+          "example": "Danni"
         }
       }
     },
-    "Response" : {
-      "type" : "object",
-      "required" : [ "Status" ],
-      "properties" : {
-        "Status" : {
-          "type" : "integer",
-          "example" : 200,
-          "description" : "The code associated with the result of the response"
+    "Response": {
+      "type": "object",
+      "required": [
+        "Status"
+      ],
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200,
+          "description": "The code associated with the result of the response"
         }
       }
     },
-    "Schedule" : {
-      "type" : "object",
-      "properties" : {
-        "TimeSlotID" : {
-          "type" : "integer",
-          "example" : 1
+    "Schedule": {
+      "type": "object",
+      "properties": {
+        "TimeSlotID": {
+          "type": "integer",
+          "example": 1
         },
-        "DeliveriesCount" : {
-          "type" : "integer",
-          "example" : 1
+        "DeliveriesCount": {
+          "type": "integer",
+          "example": 1
         }
       }
     },
-    "TimeSlot" : {
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
+    "TimeSlot": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "TimeSlots" : {
-          "type" : "array",
-          "example" : [ "\"2022-06-07T09:41:34.737Z\"", "" ],
-          "items" : {
-            "type" : "string"
+        "TimeSlots": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "\"2022-06-07T09:41:34.737Z\"",
+            ""
+          ]
+        },
+        "Description": {
+          "type": "string",
+          "example": "OK"
+        }
+      }
+    },
+    "UsersAdd": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
+        },
+        "Description": {
+          "type": "string",
+          "example": "OK"
+        }
+      }
+    },
+    "UsersInfo": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "$ref": "#/definitions/Users"
+        },
+        "Status": {
+          "type": "integer",
+          "example": 200
+        },
+        "Description": {
+          "type": "string",
+          "example": "OK"
+        }
+      }
+    },
+    "UsersList": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Users"
           }
         },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
+        "Status": {
+          "type": "integer",
+          "example": 200
+        },
+        "Description": {
+          "type": "string",
+          "example": "OK"
         }
       }
     },
-    "UsersAdd" : {
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
+    "Deliveries": {
+      "type": "object",
+      "properties": {
+        "notes": {
+          "type": "string"
         },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
+        "DeliveryID": {
+          "type": "integer",
+          "example": 1
+        },
+        "DeliverStatusID": {
+          "type": "integer",
+          "example": 1
+        },
+        "FormatedAddress": {
+          "type": "string",
+          "example": "1"
+        },
+        "Scheduletimeslot": {
+          "type": "string",
+          "example": "1"
         }
       }
     },
-    "UsersInfo" : {
-      "type" : "object",
-      "properties" : {
-        "Data" : {
-          "$ref" : "#/definitions/Users"
+    "ScheduleAdd": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
-        },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
+        "Description": {
+          "type": "string",
+          "example": "OK"
         }
       }
     },
-    "UsersList" : {
-      "type" : "object",
-      "properties" : {
-        "Data" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Users"
+    "UsersFilter": {
+      "type": "object",
+      "properties": {}
+    },
+    "UsersUpdate": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
+        },
+        "Description": {
+          "type": "string",
+          "example": "OK"
+        }
+      }
+    },
+    "ScheduleInfo": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "$ref": "#/definitions/Schedule"
+        },
+        "Status": {
+          "type": "integer",
+          "example": 200
+        },
+        "Description": {
+          "type": "string",
+          "example": "OK"
+        }
+      }
+    },
+    "ScheduleList": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schedule"
           }
         },
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
+        "Description": {
+          "type": "string",
+          "example": "OK"
         }
       }
     },
-    "Deliveries" : {
-      "type" : "object",
-      "properties" : {
-        "notes" : {
-          "type" : "string"
+    "DeliveriesAdd": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "UserID" : {
-          "type" : "integer",
-          "example" : 1
-        },
-        "DeliveryID" : {
-          "type" : "integer",
-          "example" : 1
-        },
-        "ScheduleID" : {
-          "type" : "integer",
-          "example" : 1
-        },
-        "DeliverStatusID" : {
-          "type" : "integer",
-          "example" : 1
+        "Description": {
+          "type": "string",
+          "example": "OK"
         }
       }
     },
-    "ScheduleAdd" : {
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
+    "CancelResponse": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
+        "Description": {
+          "type": "string",
+          "example": "Delivery XXX Canceled"
         }
       }
     },
-    "UsersFilter" : {
-      "type" : "object"
-    },
-    "UsersUpdate" : {
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
+    "DeliveriesBook": {
+      "type": "object",
+      "properties": {
+        "User": {
+          "type": "integer",
+          "example": 1
         },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
+        "TimeslotId": {
+          "type": "string",
+          "format": "date-time",
+          "example": "\"2022-06-07T09:41:34.737Z\""
         }
       }
     },
-    "ScheduleInfo" : {
-      "type" : "object",
-      "properties" : {
-        "Data" : {
-          "$ref" : "#/definitions/Schedule"
+    "DeliveriesInfo": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "$ref": "#/definitions/Deliveries"
         },
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
+        "Description": {
+          "type": "string",
+          "example": "OK"
         }
       }
     },
-    "ScheduleList" : {
-      "type" : "object",
-      "properties" : {
-        "Data" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Schedule"
+    "DeliveriesList": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Deliveries"
           }
         },
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
+        "Description": {
+          "type": "string",
+          "example": "OK"
         }
       }
     },
-    "DeliveriesAdd" : {
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
+    "ScheduleFilter": {
+      "type": "object",
+      "properties": {}
+    },
+    "ScheduleUpdate": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
+        "Description": {
+          "type": "string",
+          "example": "OK"
         }
       }
     },
-    "GeneralObject" : {
-      "type" : "object"
-    },
-    "CancalResponse" : {
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
+    "CompleteResponse": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Description" : {
-          "type" : "string",
-          "example" : "Delivery XXX Canceled"
+        "Description": {
+          "type": "string",
+          "example": "Delivery XXX Complited"
         }
       }
     },
-    "DeliveriesBook" : {
-      "type" : "object",
-      "properties" : {
-        "User" : {
-          "type" : "integer",
-          "example" : 1
+    "DeliveriesFilter": {
+      "type": "object",
+      "properties": {}
+    },
+    "DeliveriesUpdate": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "TimeslotId" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "\"2022-06-07T09:41:34.737Z\""
+        "Description": {
+          "type": "string",
+          "example": "OK"
         }
       }
     },
-    "DeliveriesInfo" : {
-      "type" : "object",
-      "properties" : {
-        "Data" : {
-          "$ref" : "#/definitions/Deliveries"
-        },
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
-        },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
-        }
-      }
-    },
-    "DeliveriesList" : {
-      "type" : "object",
-      "properties" : {
-        "Data" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Deliveries"
+    "DeliveriesBookResponse": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveriesBook"
           }
         },
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
+        "Description": {
+          "type": "string",
+          "example": "OK"
         }
       }
     },
-    "ScheduleFilter" : {
-      "type" : "object"
-    },
-    "ScheduleUpdate" : {
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
-        },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
-        }
-      }
-    },
-    "CompleteResponse" : {
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
-        },
-        "Description" : {
-          "type" : "string",
-          "example" : "Delivery XXX Complited"
-        }
-      }
-    },
-    "DeliveriesFilter" : {
-      "type" : "object"
-    },
-    "DeliveriesUpdate" : {
-      "type" : "object",
-      "properties" : {
-        "Status" : {
-          "type" : "integer",
-          "example" : 200
-        },
-        "Description" : {
-          "type" : "string",
-          "example" : "OK"
-        }
-      }
-    },
-    "DeliveriesBookResponse" : {
-      "type" : "object",
-      "properties" : {
-        "Data" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/DeliveriesBook"
+    "DeliveriesListResponse": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Deliveries"
           }
         },
-        "Status" : {
-          "type" : "integer"
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Description" : {
-          "type" : "string"
+        "Description": {
+          "type": "string",
+          "example": "OK"
         }
       }
     },
-    "DeliveriesListResponse" : {
-      "type" : "object",
-      "properties" : {
-        "Data" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/Deliveries"
-          }
+    "ResolveAddressResponse": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Status" : {
-          "type" : "integer"
+        "Description": {
+          "type": "string",
+          "example": "UserID: XXX FormatedAdress Updated"
+        }
+      }
+    },
+    "FormattedAddressResponse": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
         },
-        "Description" : {
-          "type" : "string"
+        "Description": {
+          "type": "string",
+          "example": "UserID: XXX FormatedAdress Updated"
         }
       }
     }
-  }
+  },
+  "securityDefinitions": {}
 }

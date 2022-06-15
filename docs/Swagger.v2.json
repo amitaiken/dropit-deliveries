@@ -8,191 +8,6 @@
     "termsOfService": ""
   },
   "paths": {
-    "/Users/Add/": {
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/UsersAdd"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Users",
-            "schema": {
-              "$ref": "#/definitions/Users"
-            }
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "UsersAdd",
-        "x-serviceID": 15,
-        "x-methodName": "Add",
-        "x-serviceName": "Users"
-      }
-    },
-    "/Schedule/Add/": {
-      "post": {
-        "tags": [
-          "Schedule"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/ScheduleAdd"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Schedule",
-            "schema": {
-              "$ref": "#/definitions/Schedule"
-            }
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "ScheduleAdd",
-        "x-serviceID": 12,
-        "x-methodName": "Add",
-        "x-serviceName": "Schedule"
-      }
-    },
-    "/Users/Update/": {
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/UsersUpdate"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Users",
-            "schema": {
-              "$ref": "#/definitions/Users"
-            }
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "UsersUpdate",
-        "x-serviceID": 15,
-        "x-methodName": "Update",
-        "x-serviceName": "Users"
-      }
-    },
-    "/Deliveries/Add/": {
-      "post": {
-        "tags": [
-          "Deliveries"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/DeliveriesAdd"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Deliveries",
-            "schema": {
-              "$ref": "#/definitions/Deliveries"
-            }
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "DeliveriesAdd",
-        "x-serviceID": 1,
-        "x-methodName": "Add",
-        "x-serviceName": "Deliveries"
-      }
-    },
-    "/Schedule/Update/": {
-      "post": {
-        "tags": [
-          "Schedule"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/ScheduleUpdate"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Schedule",
-            "schema": {
-              "$ref": "#/definitions/Schedule"
-            }
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "ScheduleUpdate",
-        "x-serviceID": 12,
-        "x-methodName": "Update",
-        "x-serviceName": "Schedule"
-      }
-    },
     "/Deliveries/Dayly/": {
       "get": {
         "tags": [
@@ -219,43 +34,6 @@
         "operationId": "DeliveriesDayly",
         "x-serviceID": 1,
         "x-methodName": "Dayly",
-        "x-serviceName": "Deliveries"
-      }
-    },
-    "/Deliveries/Update/": {
-      "post": {
-        "tags": [
-          "Deliveries"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/DeliveriesUpdate"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Deliveries",
-            "schema": {
-              "$ref": "#/definitions/Deliveries"
-            }
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "DeliveriesUpdate",
-        "x-serviceID": 1,
-        "x-methodName": "Update",
         "x-serviceName": "Deliveries"
       }
     },
@@ -317,79 +95,7 @@
         "x-serviceName": "Schedule"
       }
     },
-    "/Users/Info/{UsersID}": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/UsersInfo"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "UsersID",
-            "type": "integer",
-            "required": true
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "UsersInfo",
-        "x-serviceID": 15,
-        "x-methodName": "Info",
-        "x-serviceName": "Users"
-      }
-    },
-    "/Users/List/{UsersID}": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/UsersList"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "UsersID",
-            "type": "integer",
-            "required": true
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "UsersList",
-        "x-serviceID": 15,
-        "x-methodName": "List",
-        "x-serviceName": "Users"
-      }
-    },
-    "/Deliveries/Deliveries/": {
+    "/Deliveries/BookDelivery/": {
       "post": {
         "tags": [
           "Deliveries"
@@ -408,25 +114,33 @@
             "description": "Error Response"
           }
         },
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "DeliveriesBook",
+            "schema": {
+              "$ref": "#/definitions/DeliveriesBook"
+            }
+          }
+        ],
         "x-AuthType": [
           "None"
         ],
-        "operationId": "DeliveriesDeliveries",
+        "operationId": "DeliveriesBookDelivery",
         "x-serviceID": 1,
-        "x-methodName": "Deliveries",
+        "x-methodName": "BookDelivery",
         "x-serviceName": "Deliveries"
       }
     },
-    "/Schedule/Info/{ScheduleID}": {
-      "get": {
+    "/Users/ResolveAddress/{UserID}": {
+      "post": {
         "tags": [
-          "Schedule"
+          "Users"
         ],
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ScheduleInfo"
+              "$ref": "#/definitions/FormattedAddressResponse"
             },
             "description": "Status 200"
           },
@@ -440,7 +154,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "ScheduleID",
+            "name": "UserID",
             "type": "integer",
             "required": true
           }
@@ -448,118 +162,10 @@
         "x-AuthType": [
           "None"
         ],
-        "operationId": "ScheduleInfo",
-        "x-serviceID": 12,
-        "x-methodName": "Info",
-        "x-serviceName": "Schedule"
-      }
-    },
-    "/Schedule/List/{ScheduleID}": {
-      "get": {
-        "tags": [
-          "Schedule"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/ScheduleList"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "ScheduleID",
-            "type": "integer",
-            "required": true
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "ScheduleList",
-        "x-serviceID": 12,
-        "x-methodName": "List",
-        "x-serviceName": "Schedule"
-      }
-    },
-    "/Deliveries/Info/{DeliveryID}": {
-      "get": {
-        "tags": [
-          "Deliveries"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/DeliveriesInfo"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "DeliveryID",
-            "type": "integer",
-            "required": true
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "DeliveriesInfo",
-        "x-serviceID": 1,
-        "x-methodName": "Info",
-        "x-serviceName": "Deliveries"
-      }
-    },
-    "/Deliveries/List/{DeliveryID}": {
-      "get": {
-        "tags": [
-          "Deliveries"
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": "#/definitions/DeliveriesList"
-            },
-            "description": "Status 200"
-          },
-          "400": {
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "description": "Error Response"
-          }
-        },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "DeliveryID",
-            "type": "integer",
-            "required": true
-          }
-        ],
-        "x-AuthType": [
-          "None"
-        ],
-        "operationId": "DeliveriesList",
-        "x-serviceID": 1,
-        "x-methodName": "List",
-        "x-serviceName": "Deliveries"
+        "operationId": "UsersResolveAddress",
+        "x-serviceID": 15,
+        "x-methodName": "ResolveAddress",
+        "x-serviceName": "Users"
       }
     },
     "/Deliveries/Cancel/{DeliveryID}": {
@@ -570,7 +176,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/CancalResponse"
+              "$ref": "#/definitions/CancelResponse"
             },
             "description": "Status 200"
           },
@@ -634,15 +240,15 @@
         "x-serviceName": "Deliveries"
       }
     },
-    "/Deliveries/ResolveAdress/{UserID}": {
+    "/Users/FormatedAddressUpdate/{UserID}/{FormatedAddress}": {
       "post": {
         "tags": [
-          "Deliveries"
+          "Users"
         ],
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/GeneralObject"
+              "$ref": "#/definitions/FormattedAddressResponse"
             },
             "description": "Status 200"
           },
@@ -656,6 +262,12 @@
         "parameters": [
           {
             "in": "path",
+            "name": "FormatedAddress",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
             "name": "UserID",
             "type": "integer",
             "required": true
@@ -664,10 +276,10 @@
         "x-AuthType": [
           "None"
         ],
-        "operationId": "DeliveriesResolveAdress",
-        "x-serviceID": 1,
-        "x-methodName": "ResolveAdress",
-        "x-serviceName": "Deliveries"
+        "operationId": "UsersFormatedAddressUpdate",
+        "x-serviceID": 15,
+        "x-methodName": "FormatedAddressUpdate",
+        "x-serviceName": "Users"
       }
     }
   },
@@ -716,6 +328,10 @@
         "UserID": {
           "type": "integer",
           "example": 1
+        },
+        "Address": {
+          "type": "string",
+          "example": "Netiv 4"
         },
         "Phone_1": {
           "type": "string",
@@ -840,21 +456,21 @@
         "notes": {
           "type": "string"
         },
-        "UserID": {
-          "type": "integer",
-          "example": 1
-        },
         "DeliveryID": {
-          "type": "integer",
-          "example": 1
-        },
-        "ScheduleID": {
           "type": "integer",
           "example": 1
         },
         "DeliverStatusID": {
           "type": "integer",
           "example": 1
+        },
+        "FormatedAddress": {
+          "type": "string",
+          "example": "1"
+        },
+        "Scheduletimeslot": {
+          "type": "string",
+          "example": "1"
         }
       }
     },
@@ -936,11 +552,7 @@
         }
       }
     },
-    "GeneralObject": {
-      "type": "object",
-      "properties": {}
-    },
-    "CancalResponse": {
+    "CancelResponse": {
       "type": "object",
       "properties": {
         "Status": {
@@ -1059,10 +671,12 @@
           }
         },
         "Status": {
-          "type": "integer"
+          "type": "integer",
+          "example": 200
         },
         "Description": {
-          "type": "string"
+          "type": "string",
+          "example": "OK"
         }
       }
     },
@@ -1076,10 +690,38 @@
           }
         },
         "Status": {
-          "type": "integer"
+          "type": "integer",
+          "example": 200
         },
         "Description": {
-          "type": "string"
+          "type": "string",
+          "example": "OK"
+        }
+      }
+    },
+    "ResolveAddressResponse": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
+        },
+        "Description": {
+          "type": "string",
+          "example": "UserID: XXX FormattedAddress Updated"
+        }
+      }
+    },
+    "FormattedAddressResponse": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "integer",
+          "example": 200
+        },
+        "Description": {
+          "type": "string",
+          "example": "UserID: XXX FormattedAddress Updated"
         }
       }
     }
