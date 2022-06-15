@@ -21,10 +21,25 @@ module.exports = class {
             results = await connection.query("SP_UsersResolveAddress(?, ?)",[userID, addressData]);
             res.code(results.Status).send(results);
         } catch (error) {
-            console.error(`Error in ChildrenList: ${error.message}`);
+            console.error(`Error in UsersResolveAddress: ${error.message}`);
             res.code(500).send({
                 Status: 500,
-                Message: 'Error in ChildrenList',
+                Message: 'Error in UsersResolveAddress',
+                Description: error.message,
+            });
+        }
+    }
+    async FormattedAddressUpdate(req, res) {
+        try {
+            const formattedAddress = JSON.parse(req.params['FormattedAddress']);
+
+            results = await connection.query("SP_UsersResolveAddress(?, ?)",[userID, formattedAddress]);
+            res.code(results.Status).send(addressData);
+        } catch (error) {
+            console.error(`Error in FormattedAddressUpdate: ${error.message}`);
+            res.code(500).send({
+                Status: 500,
+                Message: 'Error in FormattedAddressUpdate',
                 Description: error.message,
             });
         }
