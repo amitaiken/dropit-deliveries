@@ -1,6 +1,9 @@
 const fastify = require('fastify')({ logger: true })
 const fs = require('fs');
-const config = require('config');
+const config = require('./config');
+const galeraCluster = require('@voicenter-team/mysql-dynamic-cluster');
+const cluster = galeraCluster.createPoolCluster(config.mysql);
+
 global['classes'] = {};
 
 const generatedControllersPath = `${__dirname}/routes_generated`;
@@ -65,13 +68,16 @@ const swaggerOptions = {
 fastify
     .register(require('fastify-swagger'), swaggerOptions)
 // run the server
-if (process.env.NODE_ENV !== 'test')
-    fastify.listen(3000,'0.0.0.0', (err) => {
-        if (err) {
-            fastify.log.error(err);
-            process.exit(1);
-        }
+
+const startWebService = async () => {
+    try {
+        await fastify.listen(3000);
         fastify.log.info(`Server listening on ${fastify.server.address().port}, env: ${process.env.NODE_ENV}`)
-    });
+    } catch (err) {
+        fastify.log.error(err)
+        process.exit(1)
+    }
+}
+startWebService();
 
 module.exports = fastify;
