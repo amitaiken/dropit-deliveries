@@ -2,12 +2,6 @@
 const XLSX = require('xlsx');
 const fs = require('fs');
 
-const DayMultiplier = 60*60*24*1000;
-
-function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
-}
-
 Array.prototype.insert = function ( index, item ) {
     this.splice( index, 0, item );
 };
@@ -58,7 +52,7 @@ class XLSXGenerator {
         console.log("XLSXGenerator Class is loading ... ");
         this.reportData = req;
     }
-    async createExcelAttendanceReport(reportData, fileName){
+    async createExcelAttendanceReport(reportData, holidaysTimeslots, fileName){
         try {
             let wb = XLSX.utils.book_new();
             wb.Props = {
@@ -75,9 +69,9 @@ class XLSXGenerator {
                 const workerData = issuesIntervalData[key];
                 const workerSheetData = new WorkerTableSheet(headers);
                 /* fill jira issue lines */
-                workerSheetData.fillJiraLines(workerData);
+                workerSheetData.fillJiraLines(workerData, holidaysTimeslots);
                 /* Add total line */
-                //workerSheetData.summarizeDateTimeWork(workerData);
+                workerSheetData.summarizeDateTimeWork(workerData);
                 //workerSheetData.defineCellsAsTime(workerData);
                 XLSX.utils.book_append_sheet(wb, workerSheetData.worksheet, key);
             });
@@ -101,6 +95,7 @@ class WorkerTableSheet {
     firstColumn = {name: 'JiraIssues/Dates'};
     lineNames = [];
     worksheet = [];
+
     constructor(headers) {
         this.headers = headers;
         headers.forEach(header => {
@@ -108,113 +103,69 @@ class WorkerTableSheet {
             this.headerLine.push(date);
             this.countHeaders += 1;
         });
-        this.worksheet =  XLSX.utils.json_to_sheet(this.headerLine);
+        this.worksheet = XLSX.utils.json_to_sheet(this.headerLine);
         /* fix headers */
-        XLSX.utils.sheet_add_aoa(this.worksheet, [this.headerLine], { origin: "A1" });
-        XLSX.utils.sheet_add_aoa(this.worksheet, [['JiraIssues/Dates']], { origin: "A1" });
-        XLSX.utils.sheet_add_aoa(this.worksheet, [['Issue total work']], { origin: {c:this.countHeaders ,r:0} });
+        XLSX.utils.sheet_add_aoa(this.worksheet, [this.headerLine], {origin: "A1"});
+        XLSX.utils.sheet_add_aoa(this.worksheet, [['deliveries/Dates']], {origin: "A1"});
+        XLSX.utils.sheet_add_aoa(this.worksheet, [['total deliveries']], {origin: {c: this.countHeaders, r: 0}});
         /* column width */
-        this.worksheet["!cols"] = [ {wch:25} ];
-        for(let i=0; i<headers.length; i++) {
+        this.worksheet["!cols"] = [{wch: 25}];
+        for (let i = 0; i < headers.length; i++) {
             this.worksheet["!cols"].push({wch: 15});
         }
     }
 
-     fillJiraLines(workerData) {
-         workerData.forEach((workerJira, index) => {
-             let issueTotalWork = 0;
-             const cellLine = index+2;
-             const letterIndex = "B"
-             const cellAddress = letterIndex + cellLine;
-             const jiraIssue = workerJira.project_name + '-' + workerJira.issueid;
-             XLSX.utils.sheet_add_aoa(this.worksheet,[[jiraIssue]],{origin: cellAddress});
-             const jiraTaskList = workerJira.TaskList;
-             const taskListLength = jiraTaskList.length;
-             let taskIndex = 0;
-             for (let i = 1;  i<this.countHeaders; i++) {
-                 let timeWork = 0;
-                 if (taskIndex < taskListLength) {
-                     let currentTaskDate = new Date(jiraTaskList[taskIndex].logYear, (jiraTaskList[taskIndex].logMonth - 1), jiraTaskList[taskIndex].logDay);
-                     if ((this.headers[i]).getTime() === currentTaskDate.getTime()) {
-                         timeWork = jiraTaskList[taskIndex].timeworked // /3600
-                         issueTotalWork += timeWork;
-                         taskIndex += 1;
-                     }
-                 }
-                 //letterIndex = convertToAbBase(i);
-                 let cellAddress = {
-                     c: i,
-                     r: (cellLine-1),
-                 };
-                 XLSX.utils.sheet_add_aoa(this.worksheet,[[timeWork]],{origin: cellAddress});
-                 let cell = this.worksheet[cellAddress];
-                 //delete cell.w;
-                 cell.z = 'h:mm:ss';
-                 XLSX.utils.format_cell(cell);
-
-             }
-         });
-        /*
-        workerData.forEach(workerJira => {
-            const jiraIssues = [];
+    fillJiraLines(weekData, holidaysTimeslots) {
+        weekData.forEach((workerJira, index) => {
             let issueTotalWork = 0;
+            let freeTimeSlot = 1;
+            const cellLine = index + 2;
+            const letterIndex = "B"
+            const cellAddress = letterIndex + cellLine;
             const jiraIssue = workerJira.project_name + '-' + workerJira.issueid;
-            jiraIssues.push(jiraIssue);
+            XLSX.utils.sheet_add_aoa(this.worksheet, [[jiraIssue]], {origin: cellAddress});
             const jiraTaskList = workerJira.TaskList;
             const taskListLength = jiraTaskList.length;
-            this.countLines += taskListLength;
             let taskIndex = 0;
-            for (let i = 0;  i<this.countHeaders-1; i++) {
+            for (let i = 1; i < this.countHeaders; i++) {
                 let timeWork = 0;
                 if (taskIndex < taskListLength) {
                     let currentTaskDate = new Date(jiraTaskList[taskIndex].logYear, (jiraTaskList[taskIndex].logMonth - 1), jiraTaskList[taskIndex].logDay);
                     if ((this.headers[i]).getTime() === currentTaskDate.getTime()) {
                         timeWork = jiraTaskList[taskIndex].timeworked // /3600
                         issueTotalWork += timeWork;
+                        if ((issueTotalWork > 2 || (holidaysTimeslots.date == currentTaskDate))) freeTimeSlot = 0;
                         taskIndex += 1;
                     }
                 }
-                //timeWork = getTimeFormat(timeWork);
-                jiraIssues.push(timeWork);
+                let cellAddress = {
+                    c: i,
+                    r: (cellLine - 1),
+                };
+                XLSX.utils.sheet_add_aoa(this.worksheet, [[freeTimeSlot]], {origin: cellAddress});
+                let cell = this.worksheet[cellAddress];
+                cell.z = 'h:mm:ss';
+                XLSX.utils.format_cell(cell);
+
             }
-            jiraIssues.push(issueTotalWork);
-            this.workerXLSXLines.push(jiraIssues);
         });
-        XLSX.utils.sheet_add_aoa(this.worksheet,this.workerXLSXLines,{origin: "A2"});
-         */
     }
+
     summarizeDateTimeWork(workerData) {
         let sumLine = [];
         const totalLineIndex = workerData.length;
-        for (let i = 1;  i<(this.countHeaders+1) ; i++) {
+        for (let i = 1; i < (this.countHeaders + 1); i++) {
             let totalDateTime = 0;
-            for(let j = 0; j<totalLineIndex; j++) {
+            for (let j = 0; j < totalLineIndex; j++) {
                 if (this.workerXLSXLines[j][i]) totalDateTime += this.workerXLSXLines[j][i];    //&& this.workerXLSXLines[i][j]>0
             }
             sumLine.push(totalDateTime);
         }
-        const targetCell =  {c:1, r:(totalLineIndex+1), z: 'h:mm:ss'};
-        XLSX.utils.sheet_add_aoa(this.worksheet, [sumLine], { origin: targetCell });
-        const totalTitleIndex = {c:0, r:(totalLineIndex+1)};
-        XLSX.utils.sheet_add_aoa(this.worksheet, [['Total']], { origin: totalTitleIndex });
-    }
-
-    defineCellsAsTime(workerData) {
-        let columnLetter;
-        for (let i = 1;  i<(this.countHeaders+2) ; i++) {
-            let letterIndex = convertToAbBase(i);
-            for(let j = 2; j<this.countLines+1; j++) {
-                const cellAddress = letterIndex + j;
-                let cell = this.worksheet[cellAddress];
-                if (cell) {
-                    delete cell.w;
-                    cell.z = 'h:mm:ss';
-                    XLSX.utils.format_cell(cell);
-                }
-            }
-        }
+        const targetCell = {c: 1, r: (totalLineIndex + 1), z: 'h:mm:ss'};
+        XLSX.utils.sheet_add_aoa(this.worksheet, [sumLine], {origin: targetCell});
+        const totalTitleIndex = {c: 0, r: (totalLineIndex + 1)};
+        XLSX.utils.sheet_add_aoa(this.worksheet, [['Total']], {origin: totalTitleIndex});
     }
 }
-
 module.exports = XLSXGenerator;
 

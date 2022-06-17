@@ -37,17 +37,12 @@ module.exports = class {
         this.params = params;
     }
     async ScheduleTimeslots(req, res) {
-        function checkFreeTimeslots(bookedTimeslots, holidaysTimeslots) {
-            let scheduleData;
-            return scheduleData;
-        }
         try {
             const results = await connection.query("FN_ScheduleTimeslots()");
             const bookedTimeslots = results.Data;
             const holidaysTimeslots = await getHolidaysTimeslots();
-            const scheduleData = checkFreeTimeslots(bookedTimeslots, holidaysTimeslots)
             const weekTimeslots = new XLSXGenerator(scheduleData);
-            const exelFile = await weekTimeslots.createExcelAttendanceReport(weekTimeslots.reportData, 'week-deliveries-schedule.xlsx');
+            const exelFile = await weekTimeslots.createExcelAttendanceReport(weekTimeslots.reportData, holidaysTimeslots, 'week-deliveries-schedule.xlsx');
             res.code(200).send(exelFile).header('Content-Type', 'application/vnd.ms-excel');
         } catch (error) {
             console.error(`Error in ScheduleTimeslots: ${error.message}`);
