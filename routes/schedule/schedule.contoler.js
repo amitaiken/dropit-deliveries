@@ -1,33 +1,67 @@
 let mysql = require('mysql');
-let config = require('/helper/config');
+let config = require('config');
 let connection = mysql.createConnection(config);
 const axios = require('axios').default;
-const XLSXGenerator = require('./helpers/create-xlsx.js');
+//const XLSXGenerator = require('../../helpers/create-xlsx.js');
 
-
-
-async function getNextSundayDate(){
-    let today = new Date();
-    let nextSundayDate = new Date(today. getFullYear(), today. getMonth(), today. getDate()+7);
-    return nextSundayDate;
-}
-
-async function getNextThursdayDate(){
-    let today = new Date();
-    let nextSundayDate = new Date(today. getFullYear(), today. getMonth(), today. getDate()+12);
-    return nextSundayDate;
-}
-
-async function getHolidaysTimeslots() {
-    //https://holidayapi.com/v1/workday?pretty&key=__YOUR_API_KEY__&country=IL&start=2021-06-16&days=7
+async function getHolidaysTimeslots(sunday) {
     const baseURL = 'https://holidayapi.com/v1/holidays?pretty&key='
-    const key = '__YOUR_API_KEY__';
+    const key = process.env.HOLIDAY_API_KEY;
     const country = 'IL'
-    const start = await getNextSundayDate();
-    const days = 7;
-    const urlString = baseURL + key + '&country=' + country + '&start=' + start + '&days=' + days;
+    const days = 5;
+    const urlString = baseURL + key + '&country=' + country + '&start=' + sunday + '&days=' + days;
     let daysTimeslots = await axios(urlString);
     return daysTimeslots;
+}
+
+class DaySchedule {
+    scheduleDate;
+    isHoliday;
+    availableTimeslots = [];
+    deliveriesCount = 0;
+    constructor(date) {
+        this.scheduleDate = date;
+        let currentTimeslot = new Date(date)
+        currentTimeslot.setHours(9);
+        for (let i = 0; i<7; i++){
+            currentTimeslot = new Date(currentTimeslot);
+            currentTimeslot.setHours(1.5*i);
+            this.availableTimeslots.push(currentTimeslot);
+        }
+    }
+    markAsHoliday(){
+        this.isHoliday = 1;
+        this.availableTimeslots = [];
+    };
+    markBookedTimeslots(bookedTimeslots){
+
+    }
+
+}
+
+class ScheduleTimeslots {
+    startDate
+    endDate
+    daysArray = [];
+    constructor(startDate, endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        let daysLoop = startDate;
+        while (daysLoop >= endDate){
+            let currentDay = new DaySchedule(daysLoop);
+            this.daysArray.push(currentDay)
+        }
+    }
+    getAvailableTimeslots(bookedTimeslots, holidaysTimeslots) {
+        function isHoliday(holidaysTimeslots) {
+            return false;
+        }
+
+        this.daysArray.forEach(day => {
+           if (isHoliday(holidaysTimeslots)) day.markAsHoliday();
+           day.markBookedTimeslots(bookedTimeslots)
+        });
+    }
 }
 
 module.exports = class {
@@ -39,11 +73,11 @@ module.exports = class {
     async ScheduleTimeslots(req, res) {
         try {
             const results = await connection.query("FN_ScheduleTimeslots()");
-            const bookedTimeslots = results.Data;
-            const holidaysTimeslots = await getHolidaysTimeslots();
-            const weekTimeslots = new XLSXGenerator(scheduleData);
-            const exelFile = await weekTimeslots.createExcelAttendanceReport(weekTimeslots.reportData, holidaysTimeslots, 'week-deliveries-schedule.xlsx');
-            res.code(200).send(exelFile).header('Content-Type', 'application/vnd.ms-excel');
+            const bookedTimeslots = JSON.parse(results.Data);
+            const holidaysTimeslots = await getHolidaysTimeslots(results.NextSunday);
+            const scheduleTimeslots = new ScheduleTimeslots(results.NextSunday, results.NextThursday)
+            scheduleTimeslots.getAvailableTimeslots(bookedTimeslots, holidaysTimeslots);
+            res.code(200).send(scheduleTimeslots).header('Content-Type', 'application/vnd.ms-excel');
         } catch (error) {
             console.error(`Error in ScheduleTimeslots: ${error.message}`);
             res.code(500).send({
