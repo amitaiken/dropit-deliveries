@@ -61,4 +61,21 @@ module.exports = class {
             });
         }
     }
+    async UsersBookDelivery(req, res) {
+        try {
+            let bookDelivery = new global.classes['BookDelivery'](req, res, req.body);
+            bookDelivery = JSON.parse(JSON.stringify(bookDelivery.params));
+            //await DeliveriesBookDelivery.validate();
+            let results = await connection.Query("SP_UsersBookDelivery(?)", [bookDelivery]);
+            results = JSON.parse(results)
+            res.code(results.Status).send(results);
+        } catch (error) {
+            console.error(`Error in UsersBookDelivery: ${error.message}`);
+            res.code(500).send({
+                Status: 500,
+                Message: 'Error in UsersBookDelivery',
+                Description: error.message,
+            });
+        }
+    }
 };
