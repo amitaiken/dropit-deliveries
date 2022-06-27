@@ -1,5 +1,5 @@
 let mysql = require('mysql');
-let config = require('/helper/config');
+let config = require('config');
 let connection = mysql.createConnection(config);
 
 module.exports = class {
@@ -10,7 +10,8 @@ module.exports = class {
     }
     async DeliveriesWeekly(req, res) {
         try {
-            const results = await connection.Query("FN_DeliveriesWeekly()");
+            let results = await connection.Query("FN_DeliveriesWeekly()");
+            results = JSON.parse(results)
             res.code(results.Status).send(results);
         } catch (error) {
             console.error(`Error in DeliveriesWeekly: ${error.message}`);
@@ -23,7 +24,8 @@ module.exports = class {
     }
     async DeliveriesDaily(req, res) {
         try {
-            const results = await connection.Query("FN_DeliveriesDaily()");
+            let results = await connection.Query("FN_DeliveriesDaily()");
+            results = JSON.parse(results)
             res.code(results.Status).send(results);
         } catch (error) {
             console.error(`Error in DeliveriesDaily: ${error.message}`);
@@ -37,7 +39,8 @@ module.exports = class {
     async DeliveriesCancel(req, res) {
         try {
             const DeliveryID = parseInt(req.params['DeliveryID']);
-            const results = await connection.query("CALL SP_DeliveriesCancel(?)", [DeliveryID]);
+            let results = await connection.query("CALL SP_DeliveriesCancel(?)", [DeliveryID]);
+            results = JSON.parse(results)
             res.code(results.Status).send(results);
         } catch (error) {
             console.error(`Error in DeliveriesCancel: ${error.message}`);
@@ -52,11 +55,11 @@ module.exports = class {
     async DeliveriesCompleted(req, res) {
         try {
             const DeliveryID = parseInt(req.params['DeliveryID']);
-            const results = await connection.query("CALL SP_DeliveriesCompleted(?)", [DeliveryID]);
+            let results = await connection.query("CALL SP_DeliveriesCompleted(?)", [DeliveryID]);
+            results = JSON.parse(results);
             res.code(results.Status).send(results);
         } catch (error) {
             console.error(`Error in DeliveriesCompleted: ${error.message}`);
-
             res.code(500).send({
                 Status: 500,
                 Message: 'Error in DeliveriesCompleted',
@@ -66,10 +69,11 @@ module.exports = class {
     }
     async DeliveriesBookDelivery(req, res) {
         try {
-            let BookDelivery = new global.classes['BookDelivery'](req, res, req.body);
-            BookDelivery = JSON.parse(JSON.stringify(childrenListFilter.params));
+            let bookDelivery = new global.classes['BookDelivery'](req, res, req.body);
+            bookDelivery = JSON.parse(JSON.stringify(bookDelivery.params));
             //await DeliveriesBookDelivery.validate();
-            const results = await connection.Query("SP_DeliveriesBookDelivery(?)", [BookDelivery]);
+            let results = await connection.Query("SP_DeliveriesBookDelivery(?)", [bookDelivery]);
+            results = JSON.parse(results)
             res.code(results.Status).send(results);
         } catch (error) {
             console.error(`Error in DeliveriesBookDelivery: ${error.message}`);
