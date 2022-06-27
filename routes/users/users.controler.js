@@ -6,7 +6,7 @@ const axios = require('axios').default;
 
 async function getFormattedAddress(addressData, singleLine) {
     const baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address='
-    const key = 'AIzaSyABp5ntY2-vgaLhBKyT4HWGiPXls1HAt8o';
+    const key = process.env.GOOGLE_API_KEY;
     let locationRequest;
     if(!singleLine) {
         const city = encodeURIComponent((addressData.City).trim());
