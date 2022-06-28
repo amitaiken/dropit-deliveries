@@ -10,7 +10,7 @@ async function getHolidaysTimeslots(sunday) {
     const country = 'IL'
     const days = 5;
     const urlString = baseURL + key + '&country=' + country + '&start=' + sunday + '&days=' + days;
-    let daysTimeslots = await axios(urlString);
+    const daysTimeslots = await axios(urlString);
     return daysTimeslots;
 }
 
@@ -34,9 +34,15 @@ class DaySchedule {
         this.availableTimeslots = [];
     };
     markBookedTimeslots(bookedTimeslots){
-
+        const TimeslotLimit = 2;
+        const DayLimit = 10;
+        for (let i = 0; i<(bookedTimeslots.length); i++){
+            this.deliveriesCount = this.deliveriesCount + bookedTimeslots[i].DeliveriesCount;
+            if (bookedTimeslots[i].DeliveriesCount >= TimeslotLimit)
+                this.availableTimeslots = (this.availableTimeslots).filter(Timeslot => Timeslot !== bookedTimeslots[i].TimeDate);
+            if (this.deliveriesCount>DayLimit) this.availableTimeslots = [];
+        }
     }
-
 }
 
 class ScheduleTimeslots {
@@ -53,14 +59,17 @@ class ScheduleTimeslots {
         }
     }
     getAvailableTimeslots(bookedTimeslots, holidaysTimeslots) {
-        function isHoliday(holidaysTimeslots) {
-            return false;
-        }
-
         this.daysArray.forEach(day => {
-           if (isHoliday(holidaysTimeslots)) day.markAsHoliday();
+           if (isHoliday(holidaysTimeslots, day)) day.markAsHoliday();
            day.markBookedTimeslots(bookedTimeslots)
         });
+        function isHoliday(holidaysTimeslots, day) {
+            holidaysTimeslots.holidays.forEach(holiday =>{
+                if (holiday.date == day.scheduleDate && holiday.public == true && holiday.country == process.env.COUNTRY)
+                    return true;
+            })
+            return false;
+        }
     }
 }
 
