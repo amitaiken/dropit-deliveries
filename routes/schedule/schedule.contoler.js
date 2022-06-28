@@ -2,7 +2,6 @@ let mysql = require('mysql');
 let config = require('config');
 let connection = mysql.createConnection(config);
 const axios = require('axios').default;
-//const XLSXGenerator = require('../../helpers/create-xlsx.js');
 
 async function getHolidaysTimeslots(sunday) {
     const baseURL = 'https://holidayapi.com/v1/holidays?pretty&key='
