@@ -701,7 +701,7 @@
         },
         "Description": {
           "type": "string",
-          "example": "UserID: XXX FormatedAdress Updated"
+          "example": "UserID: XXX FormattedAddress Updated"
         }
       }
     },
@@ -714,7 +714,7 @@
         },
         "Description": {
           "type": "string",
-          "example": "UserID: XXX FormatedAdress Updated"
+          "example": "UserID: XXX FormattedAddress Updated"
         }
       }
     }
