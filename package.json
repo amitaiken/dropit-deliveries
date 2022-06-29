@@ -4,14 +4,16 @@
   "main": "index.js",
   "scripts": {
     "generate": "node generate.js",
-    "generate-sql": "node generate-sql.js",
     "start": "node --harmony index.js",
-    "serve": "nodemon --harmony index.js"
+    "serve": "nodemon --harmony index.js",
   },
   "dependencies": {
+    "@fastify/static": "^5.0.0",
     "@fastify/swagger": "^6.0.0",
+    "@voicenter-team/mysql-dynamic-cluster": "^2.0.0",
     "axios": "^0.27.2",
     "fastify": "^4.0.2",
+    "fastify-openapi-glue": "git+https://github.com/VoicenterTeam/fastify-openapi-glue.git",
     "mysql": "^2.18.1",
     "xlsx": "^0.18.5"
   },
