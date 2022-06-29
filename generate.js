@@ -15,8 +15,8 @@ async function generate() {
     swagger, // [required] JSON
     multiple: true, // [required] specifies that multiple classes should be created
     path: __dirname, // [required] where to create the destination directory
-    controllersDirName: 'routes_generated', // [optional] destination directory name for the REST APIs
-    definitionsDirName: 'definitions_generated', // [optional] destination directory name for the definitions
+    controllersDirName: 'generated/routes', // [optional] destination directory name for the REST APIs
+    definitionsDirName: 'generated/definitions', // [optional] destination directory name for the definitions
   });
 }
 
