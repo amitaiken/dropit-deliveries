@@ -23,12 +23,11 @@ npm run start
 
 ### DataBase
 MySql 
-- database schema at the folder: SQL/dropit_shopping_schema.sql
-- database example data at the folder: SQL/dropit_shopping_exampleData.dcomp
+- database backup data at the folder: SQL/dropit_shopping_202206290906.sql
 
 ### Generate APIs and definitions
 
-Generate APIs in the `routes_generated` directory and definitions in the `definitions_generated` directory:
+run generate - create generate, a folder you can find APIs generated from swagger: in the `routes` directory and definitions in the `definitions` directory
 
 ```
 npm run generate
@@ -40,30 +39,6 @@ Names of the generated directories can be changed in the `generate.js`.
 
 More information about the swagger-js-codegen: https://github.com/voicenter/swagger-js-codegen (Multi-class generation)
 
-### Generate SQL files
-
-```
-npm run generate-sql
-```
-
-Generated files are based on the provided JSON.
-
-### Testing
-
-Generate tests for the APIs:
-
-```
-npm run generate-tests
-```
-
-**Important**: all of the existing tests are deleted when this script is called.
-
-Run the tests:
-
-```
-npm run test
-```
-
 ### Environment
 You must use local .env file, or system environment variables to set project environment.
 Also, you should set NODE_ENV to current environment, to use corresponding config file in ./config folder
@@ -73,6 +48,13 @@ Also, you should set NODE_ENV to current environment, to use corresponding confi
 Example `.env` file structure:
 
 ```
+GOOGLE_API_KEY='A....n...o';
+DB_HOST=XXX.XXX.XXX.XXX;
+DB_USERNAME=dropit_shopping_b;
+DB_PASSWORD=judygtkXXXXX;
+DB_DATABASE=dropit_shopping;
+DB_DOCS_DATABASE=dropit_shopping_doc;
+SEND_SMS_URL=http://XXX.XXX.XXX.XXX:5000/;
 NODE_ENV = development
 SWAGGER_HOST = localhost:3000
 DB_URI = mysql://\[USER]:\[PASSWORD]@\[HOST_NAME]/\[DB_NAME]
